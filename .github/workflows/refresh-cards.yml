@@ -1,0 +1,56 @@
+name: Refresh stat cards
+
+# 兜底方案：README 若改用仓库内相对路径图片（assets/github-stats.svg），
+# 由本 Action 每小时重新抓取一次，图片由 GitHub 自己的 CDN 提供，
+# 不依赖访客能否直连 vercel.app。
+on:
+  schedule:
+    - cron: "17 * * * *"        # 每小时第 17 分
+  workflow_dispatch: {}
+  push:
+    paths: [".github/workflows/refresh-cards.yml"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-cards
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    env:
+      BASE: https://github-readme-stats-eight-theta.vercel.app/api
+      QS: theme=github_dark&hide_border=true&bg_color=0d1117&title_color=e6edf3&text_color=8b949e&icon_color=58a6ff
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch cards
+        run: |
+          set -euo pipefail
+          fetch() {  # $1 输出路径  $2 完整 URL  失败重试 4 次；全失败则保留旧文件
+            for i in 1 2 3 4; do
+              if curl -fsSL --max-time 25 "$2" -o "$1.tmp" \
+                 && ! grep -q "went wrong" "$1.tmp" \
+                 && grep -q "<svg" "$1.tmp"; then
+                mv "$1.tmp" "$1"; echo "updated $1"; return 0
+              fi
+              rm -f "$1.tmp"; sleep $((i * 15))
+            done
+            echo "keep old $1 (service unavailable)"
+          }
+          fetch assets/github-stats.svg "$BASE/?username=lizi600jin&show_icons=true&count_private=true&include_all_commits=true&hide=issues,prs,contribs&$QS"
+          fetch assets/github-langs.svg "$BASE/top-langs/?username=lizi600jin&layout=normal&langs_count=6&$QS"
+
+      - name: Commit if changed
+        run: |
+          git config user.name="github-actions[bot]"
+          git config user.email="41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain assets/)" ]; then
+            git add assets/github-stats.svg assets/github-langs.svg
+            git commit -m "chore: refresh stat cards $(date -u '+%F %H:%M')Z"
+            git push
+          else
+            echo "no change"
+          fi
