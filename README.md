@@ -12,11 +12,11 @@
 
 ### 代表项目
 
-| 项目 | 核心架构与实现进展 | 状态 |
-| :--- | :--- | :--- |
-| **[hakios-xaga](https://github.com/lizi600jin/hakios-xaga)**<br>`XNU 22.5.0` · `iOS 16.5` · `MT6895` | **天玑 8100 平台 iOS 16.5 移植（实验性）**<br>打通 `LK → mtkloader → XNU` 引导链路，支持 UFS 挂载读取 APFS 文件系统，已点亮 `1080×2460 @ 60fps` 桌面用户态；触控、USB 与 GPU 驱动推进中。 | [![stars](https://img.shields.io/github/stars/lizi600jin/hakios-xaga?style=flat-square&color=6e7681)](https://github.com/lizi600jin/hakios-xaga) |
-| **[hifi-src-bypass](https://github.com/lizi600jin/hifi-src-bypass)**<br>`AudioFlinger` · `USB HAL` · `WebUI` | **全机型 Android 音频重采样旁路直通**<br>逐层解除音频策略 XML、USB HAL 采样率表、厂商 HiFi 通道与音量曲线四处系统上限，打通 `96kHz → 384kHz`、`16 / 24 / 32-bit` 无损输出链路，附带 WebUI 与 `hifi doctor` 深度校验。 | [![stars](https://img.shields.io/github/stars/lizi600jin/hifi-src-bypass?style=flat-square&color=6e7681)](https://github.com/lizi600jin/hifi-src-bypass) |
-| **[oneplus13-audio-effect](https://github.com/lizi600jin/oneplus13-audio-effect)**<br>`OnePlus 13` · `Global EQ` | **一加 13 内置扬声器全局均衡器**<br>针对内置扬声器定制全局频响调校，接入蓝牙或 USB 音频外设时自动旁路，避免外设音染。 | [![stars](https://img.shields.io/github/stars/lizi600jin/oneplus13-audio-effect?style=flat-square&color=6e7681)](https://github.com/lizi600jin/oneplus13-audio-effect) |
+| 项目 | 核心架构与实现进展 |
+| :--- | :--- |
+| **[hakios-xaga](https://github.com/lizi600jin/hakios-xaga)**<br>`XNU 22.5.0` · `iOS 16.5` · `MT6895`<br>[![stars](https://img.shields.io/github/stars/lizi600jin/hakios-xaga?style=flat-square&color=6e7681)](https://github.com/lizi600jin/hakios-xaga) | **天玑 8100 平台 iOS 16.5 移植（实验性）**<br>打通 `LK → mtkloader → XNU` 引导链路，支持 UFS 挂载读取 APFS 文件系统，已点亮 `1080×2460 @ 60fps` 桌面用户态；触控、USB 与 GPU 驱动推进中。 |
+| **[hifi-src-bypass](https://github.com/lizi600jin/hifi-src-bypass)**<br>`AudioFlinger` · `USB HAL` · `WebUI`<br>[![stars](https://img.shields.io/github/stars/lizi600jin/hifi-src-bypass?style=flat-square&color=6e7681)](https://github.com/lizi600jin/hifi-src-bypass) | **全机型 Android 音频重采样旁路直通**<br>逐层解除音频策略 XML、USB HAL 采样率表、厂商 HiFi 通道与音量曲线四处系统上限，打通 `96kHz → 384kHz`、`16 / 24 / 32-bit` 无损输出链路，附带 WebUI 与 `hifi doctor` 校验。 |
+| **[oneplus13-audio-effect](https://github.com/lizi600jin/oneplus13-audio-effect)**<br>`OnePlus 13` · `Global EQ`<br>[![stars](https://img.shields.io/github/stars/lizi600jin/oneplus13-audio-effect?style=flat-square&color=6e7681)](https://github.com/lizi600jin/oneplus13-audio-effect) | **一加 13 内置扬声器全局均衡器**<br>针对内置扬声器定制全局频响调校，接入蓝牙或 USB 音频外设时自动旁路，避免外设音染。 |
 
 ### 技术栈与工具链
 
